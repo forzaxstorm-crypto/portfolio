@@ -270,14 +270,23 @@ footer {
     }
 }
 
-.project-status {
-    display: inline-block;
+.project-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-top: 15px;
-    padding: 6px 12px;
+    padding: 0;
+    list-style: none;
+}
+
+.project-tech-tags li {
+    padding: 5px 9px;
+    border: 1px solid rgba(192, 132, 252, 0.28);
     background: #251b3d;
-    color: #a78bfa;
+    color: #d5c6ff;
     border-radius: 20px;
     font-size: 12px;
+    line-height: 1.4;
 }
 
 
@@ -305,6 +314,17 @@ footer {
 .project-info h3 {
     color: #c084fc;
     margin-bottom: 15px;
+}
+
+.project-link {
+    display: block;
+    margin-top: 16px;
+    color: #c084fc;
+    font-weight: bold;
+}
+
+.project-card:hover .project-link {
+    color: #a78bfa;
 }
 
 .project-card {
@@ -440,7 +460,11 @@ footer {
             с красивым дизайном и анимациями.
         </p>
 
-        <span class="project-status">Учебный проект</span>
+        <ul class="project-tech-tags" aria-label="Технологии проекта">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+        </ul>
     </div>
 </a>
 
@@ -456,7 +480,11 @@ footer {
             с каталогом товаров и рабочей корзиной.
         </p>
 
-        <span class="project-status">Учебный проект</span>
+        <ul class="project-tech-tags" aria-label="Технологии проекта">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+        </ul>
     </div>
 </a>
 
@@ -469,7 +497,31 @@ footer {
             Современный сайт архитектурной компании
             с премиальным дизайном и адаптивной вёрсткой.
         </p>
-        <span class="project-status">Учебный проект</span>
+        <ul class="project-tech-tags" aria-label="Технологии проекта">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+        </ul>
+    </div>
+</a>
+
+<a href="https://forzaxstorm-crypto.github.io/portfolio/pixelforge-studio/" class="card project-card">
+    <img src="imeges/pixelforge-studio.png" alt="Главный экран PixelForge Studio с навигацией, заголовком и графической композицией">
+
+    <div class="project-info">
+        <h3>💠 PixelForge Studio</h3>
+
+        <p>
+            Личное портфолио с адаптивным дизайном,
+            разделом проектов и интерактивными элементами.
+        </p>
+
+        <ul class="project-tech-tags" aria-label="Технологии проекта">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+        </ul>
+        <span class="project-link">Посмотреть проект →</span>
     </div>
 </a>
 
