@@ -1,0 +1,1237 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA GROUP — Современные пространства для бизнеса</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f2;
+            color: #17202b;
+        }
+
+        /* ШАПКА */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            background: #ffffff;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #b18a50;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav a {
+            color: #17202b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav a:hover {
+            color: #b18a50;
+        }
+
+        .header-button {
+            padding: 13px 22px;
+            background: #17202b;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .header-button:hover {
+            background: #b18a50;
+        }
+
+        /* ГЛАВНЫЙ ЭКРАН */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            padding: 100px 8%;
+            color: white;
+            background:
+                linear-gradient(90deg, #101923 10%, #101923bb 60%, #10192355),
+                url("imeges/company-hero.jpg") center/cover;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-tag {
+            color: #d6b47e;
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            margin: 30px 0;
+            font-size: 65px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #d6b47e;
+        }
+
+        .hero p {
+            max-width: 550px;
+            color: #d1d5d9;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 17px 30px;
+            background: #b18a50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #d0aa70;
+            transform: translateY(-4px);
+        }
+
+        /* АДАПТИВНОСТЬ */
+
+        @media (max-width: 800px) {
+            .header {
+                flex-direction: column;
+                gap: 22px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .hero {
+                min-height: 550px;
+                padding: 80px 6%;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+        }
+
+/* БЛОК О КОМПАНИИ */
+
+.about {
+    padding: 110px 8%;
+    background: #f5f5f2;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.section-tag {
+    color: #b18a50;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 22px;
+}
+
+.about-text h2 {
+    max-width: 600px;
+    font-size: 43px;
+    line-height: 1.2;
+    color: #17202b;
+    margin-bottom: 25px;
+}
+
+.about-text h2 span {
+    color: #b18a50;
+}
+
+.about-text p {
+    max-width: 580px;
+    color: #68717a;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.about-button {
+    display: inline-block;
+    padding: 15px 25px;
+    background: #17202b;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.about-button:hover {
+    background: #b18a50;
+    transform: translateY(-4px);
+}
+
+.about-stats {
+    display: grid;
+    gap: 18px;
+}
+
+.stat-card {
+    padding: 25px 30px;
+    background: white;
+    border-left: 4px solid #b18a50;
+    box-shadow: 0 8px 30px #17202b0d;
+    transition: 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 12px 35px #17202b18;
+}
+
+.stat-card strong {
+    display: block;
+    color: #b18a50;
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.stat-card span {
+    color: #68717a;
+    font-size: 14px;
+}
+
+/* АДАПТИВНОСТЬ БЛОКА */
+
+@media (max-width: 800px) {
+    .about {
+        padding: 75px 6%;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-text h2 {
+        font-size: 34px;
+    }
+}
+
+
+/* НАШИ УСЛУГИ */
+
+.services {
+    padding: 110px 8%;
+    background: #ffffff;
+}
+
+.services-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.services-heading h2 {
+    margin: 18px 0;
+    color: #17202b;
+    font-size: 42px;
+}
+
+.services-heading h2 span {
+    color: #b18a50;
+}
+
+.services-heading p {
+    color: #68717a;
+    line-height: 1.7;
+}
+
+/* СЕТКА КАРТОЧЕК */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* КАРТОЧКА УСЛУГИ */
+
+.service-card {
+    overflow: hidden;
+    background: #f8f8f6;
+    border: 1px solid #e8e5df;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px #17202b18;
+}
+
+/* ФОТОГРАФИЯ */
+
+.service-image {
+    height: 240px;
+    overflow: hidden;
+    background: #e5e2dc;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.08);
+}
+
+/* ТЕКСТ КАРТОЧКИ */
+
+.service-info {
+    padding: 28px;
+}
+
+.service-number {
+    color: #b18a50;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.service-info h3 {
+    margin: 18px 0 14px;
+    color: #17202b;
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+.service-info p {
+    color: #68717a;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.service-info a {
+    color: #b18a50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.service-info a:hover {
+    color: #17202b;
+}
+
+/* АДАПТИВНОСТЬ УСЛУГ */
+
+@media (max-width: 900px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .services {
+        padding: 75px 6%;
+    }
+
+    .services-heading h2 {
+        font-size: 32px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* НАШИ ПРОЕКТЫ */
+
+.projects {
+    padding: 110px 8%;
+    background: #f5f5f2;
+}
+
+.projects-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.projects-heading h2 {
+    color: #17202b;
+    font-size: 42px;
+    margin: 18px 0;
+}
+
+.projects-heading h2 span {
+    color: #b18a50;
+}
+
+.projects-heading p {
+    color: #68717a;
+    line-height: 1.7;
+}
+
+.projects-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.project-card {
+    background: #fff;
+    overflow: hidden;
+    transition: .4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px #17202b18;
+}
+
+.project-image {
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.07);
+}
+
+.project-category {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    padding: 9px 12px;
+    background: #17202bd9;
+    color: #d6b47e;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.project-info {
+    padding: 25px;
+}
+
+.project-info h3 {
+    color: #17202b;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.project-info p {
+    color: #68717a;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.project-location {
+    color: #b18a50;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .projects {
+        padding: 75px 6%;
+    }
+
+    .projects-heading h2 {
+        font-size: 32px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* КОНТАКТЫ */
+
+.contact {
+    padding: 110px 8%;
+    background: #17202b;
+    color: white;
+}
+
+.contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.contact-text h2 {
+    font-size: 45px;
+    line-height: 1.2;
+    margin: 20px 0;
+}
+
+.contact-text h2 span {
+    color: #d6b47e;
+}
+
+.contact-text > p {
+    color: #c0c6cc;
+    line-height: 1.8;
+    max-width: 480px;
+}
+
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    margin-top: 45px;
+}
+
+.contact-details span {
+    color: #d6b47e;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.contact-details p {
+    margin-top: 10px;
+    color: white;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 17px;
+    background: #ffffff0d;
+    border: 1px solid #ffffff30;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #d6b47e;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #aeb5bc;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 17px;
+    border: none;
+    background: #b18a50;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.contact-form button:hover {
+    background: #d0aa70;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 800px) {
+    .contact {
+        padding: 75px 6%;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .contact-text h2 {
+        font-size: 35px;
+    }
+}
+
+/* FOOTER */
+
+.footer {
+    padding: 75px 8% 25px;
+    background: #101923;
+    color: white;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 55px;
+}
+
+.footer-logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.footer-logo span {
+    color: #b18a50;
+}
+
+.footer-brand p {
+    max-width: 300px;
+    margin-top: 20px;
+    color: #aeb5bc;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.footer-links,
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #d6b47e;
+}
+
+.footer-links a,
+.footer-contact a {
+    color: #c0c6cc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: #d6b47e;
+    transform: translateX(4px);
+}
+
+.footer-contact p {
+    color: #c0c6cc;
+    font-size: 14px;
+}
+
+.footer-contact a {
+    margin-top: 8px;
+    color: #d6b47e;
+    font-weight: bold;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 25px;
+    border-top: 1px solid #ffffff20;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: #89929b;
+    font-size: 12px;
+}
+
+@media (max-width: 800px) {
+    .footer {
+        padding: 60px 6% 25px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+}
+
+
+/* АНИМАЦИИ ПОЯВЛЕНИЯ */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Доступность: отключаем движение по настройке пользователя */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ДОПОЛНИТЕЛЬНАЯ МОБИЛЬНАЯ ЗАЩИТА */
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: clamp(34px, 9vw, 44px);
+    }
+
+    .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .contact-details {
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .contact-form button {
+        width: 100%;
+    }
+}
+
+.form-status {
+    color: #d6b47e;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 12px 0;
+}
+
+.portfolio-link {
+    display: inline-block;
+    color: #17202b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .3s ease;
+}
+
+.portfolio-link:hover {
+    color: #b18a50;
+    transform: translateX(-4px);
+}
+
+/* ШАПКА С КНОПКОЙ ВОЗВРАТА */
+
+.header {
+    gap: 20px;
+}
+
+.portfolio-link {
+    white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+    .header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ШАПКА -->
+
+    <header class="header">
+        <div class="logo">NOVA <span>GROUP</span></div>
+
+        <nav class="nav">
+            <a href="#home">Главная</a>
+            <a href="#about">О компании</a>
+            <a href="#services">Услуги</a>
+            <a href="#projects">Проекты</a>
+            <a href="#contact">Контакты</a>
+
+        </nav>
+
+        <a href="index.html" class="portfolio-link">
+    ← Вернуться в портфолио
+</a>
+
+        <a href="#contact" class="header-button">Связаться</a>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-tag">Архитектура нового бизнеса</div>
+
+                <h1>
+                    Создаём пространства
+                    <span>для будущего</span>
+                </h1>
+
+                <p>
+                    Проектируем и реализуем современные коммерческие
+                    пространства, в которых идеи превращаются
+                    в успешный бизнес.
+                </p>
+
+                <a href="#services" class="hero-button">
+                    Наши услуги →
+                </a>
+            </div>
+        </section>
+
+        <!-- О КОМПАНИИ -->
+
+        <section class="about" id="about">
+            <div class="about-content">
+
+                <div class="about-text">
+                    <div class="section-tag">О КОМПАНИИ</div>
+
+                    <h2>
+                        Пространство,
+                        <span>которое работает на вас</span>
+                    </h2>
+
+                    <p>
+                        NOVA GROUP — команда специалистов,
+                        создающая современные пространства для бизнеса.
+                        Мы объединяем архитектуру, функциональность
+                        и эстетику, чтобы каждый проект приносил
+                        реальную пользу нашим клиентам.
+                    </p>
+
+                    <a href="#services" class="about-button">
+                        Узнать больше →
+                    </a>
+                </div>
+
+                <div class="about-stats">
+
+                    <div class="stat-card">
+                        <strong>12+</strong>
+                        <span>Лет опыта</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>200+</strong>
+                        <span>Реализованных проектов</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>50+</strong>
+                        <span>Постоянных клиентов</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- НАШИ УСЛУГИ -->
+
+        <section class="services" id="services">
+            <div class="services-heading">
+                <div class="section-tag">ЧТО МЫ ПРЕДЛАГАЕМ</div>
+                <h2>Наши <span>услуги</span></h2>
+                <p>
+                    Комплексные решения для создания
+                    современных пространств вашего бизнеса.
+                </p>
+            </div>
+
+            <div class="services-grid">
+
+                <article class="service-card">
+                    <div class="service-image">
+                        <img src="imeges/service-architecture.jpg"
+                             alt="Архитектурное проектирование">
+                    </div>
+                    <div class="service-info">
+                        <span class="service-number">01 / 03</span>
+                        <h3>Архитектурное проектирование</h3>
+                        <p>
+                            Разрабатываем современные архитектурные
+                            решения с учётом задач вашего бизнеса.
+                        </p>
+                        <a href="#contact">Подробнее →</a>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-image">
+                        <img src="imeges/service-interior.jpg"
+                             alt="Дизайн коммерческих пространств">
+                    </div>
+                    <div class="service-info">
+                        <span class="service-number">02 / 03</span>
+                        <h3>Дизайн интерьеров</h3>
+                        <p>
+                            Создаём функциональные и эстетичные
+                            интерьеры для офисов и коммерческих объектов.
+                        </p>
+                        <a href="#contact">Подробнее →</a>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-image">
+                        <img src="imeges/service-construction.jpg"
+                             alt="Реализация проектов">
+                    </div>
+                    <div class="service-info">
+                        <span class="service-number">03 / 03</span>
+                        <h3>Реализация под ключ</h3>
+                        <p>
+                            Сопровождаем проект на каждом этапе —
+                            от идеи до готового пространства.
+                        </p>
+                        <a href="#contact">Подробнее →</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- НАШИ ПРОЕКТЫ -->
+
+        <section class="projects" id="projects">
+            <div class="projects-heading">
+                <div class="section-tag">НАШЕ ПОРТФОЛИО</div>
+                <h2>Проекты, которыми <span>мы гордимся</span></h2>
+                <p>Каждое пространство — результат продуманной архитектуры и внимания к деталям.</p>
+            </div>
+
+            <div class="projects-grid">
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="imeges/project-office.jpg" alt="Современный офис">
+                        <span class="project-category">ОФИСНЫЕ ПРОСТРАНСТВА</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Business Center</h3>
+                        <p>Современное офисное пространство</p>
+                        <span class="project-location">Киев, Украина</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="imeges/project-store.jpg" alt="Коммерческое пространство">
+                        <span class="project-category">КОММЕРЧЕСКИЙ ДИЗАЙН</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Urban Space</h3>
+                        <p>Дизайн современного торгового пространства</p>
+                        <span class="project-location">Винница, Украина</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="imeges/project-building.jpg" alt="Архитектура бизнес-центра">
+                        <span class="project-category">АРХИТЕКТУРА</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Nova Business Hub</h3>
+                        <p>Архитектурная концепция бизнес-центра</p>
+                        <span class="project-location">Львов, Украина</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+
+        <section class="contact" id="contact">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <div class="section-tag">ДАВАЙТЕ СОЗДАДИМ ЧТО-ТО ВМЕСТЕ</div>
+                    <h2>Обсудим ваш <span>проект?</span></h2>
+                    <p>
+                        Расскажите нам о своей идее.
+                        Мы поможем превратить её в современное
+                        и функциональное пространство.
+                    </p>
+
+                    <div class="contact-details">
+                        <div>
+                            <span>EMAIL</span>
+                            <p>hello@novagroup.example</p>
+                        </div>
+                        <div>
+                            <span>ТЕЛЕФОН</span>
+                            <p>+380 (00) 000 00 00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="tel" placeholder="Ваш телефон" required>
+                    <textarea placeholder="Расскажите о вашем проекте" rows="5"></textarea>
+                    <button type="submit">Отправить заявку →</button>
+                </form>
+            </div>
+        </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <div class="footer-logo">NOVA <span>GROUP</span></div>
+                <p>
+                    Создаём пространства, в которых
+                    рождаются идеи и развивается бизнес.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Навигация</h3>
+                <a href="#home">Главная</a>
+                <a href="#about">О компании</a>
+                <a href="#services">Услуги</a>
+                <a href="#projects">Проекты</a>
+                <a href="#contact">Контакты</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Связаться с нами</h3>
+                <p>hello@novagroup.example</p>
+                <p>+380 (00) 000 00 00</p>
+                <a href="#contact">Оставить заявку →</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 NOVA GROUP. Все права защищены.</p>
+            <span>Архитектура нового бизнеса</span>
+        </div>
+    </footer>
+
+    </main>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // 1. АНИМАЦИЯ ПОЯВЛЕНИЯ БЛОКОВ
+
+    const animatedElements = document.querySelectorAll(
+        ".hero-content, .about-content, .services-heading, " +
+        ".service-card, .projects-heading, .project-card, " +
+        ".contact-content, .footer-content"
+    );
+
+    animatedElements.forEach(function (element) {
+        element.classList.add("reveal");
+    });
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            function (entries, observerInstance) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+        animatedElements.forEach(function (element) {
+            observer.observe(element);
+        });
+    } else {
+        animatedElements.forEach(function (element) {
+            element.classList.add("visible");
+        });
+    }
+
+
+    // 2. КОНТАКТНАЯ ФОРМА
+
+    const contactForm = document.querySelector(".contact-form");
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const name = contactForm.querySelector(
+                'input[type="text"]'
+            ).value.trim();
+
+            const phone = contactForm.querySelector(
+                'input[type="tel"]'
+            ).value.trim();
+
+            const message = contactForm.querySelector(
+                "textarea"
+            ).value.trim();
+
+            let status = contactForm.querySelector(".form-status");
+
+            if (!status) {
+                status = document.createElement("p");
+                status.className = "form-status";
+                status.setAttribute("role", "status");
+                status.setAttribute("aria-live", "polite");
+                contactForm.appendChild(status);
+            }
+
+            if (!name || !phone) {
+                status.textContent = "Заполните имя и телефон.";
+                return;
+            }
+
+            // Демонстрационный режим:
+            // данные пока не отправляются на сервер.
+
+            status.textContent =
+                "Спасибо, " + name +
+                "! Форма работает в демонстрационном режиме. " +
+                "Для реальной отправки нужно подключить сервер.";
+
+            status.style.color = "#d6b47e";
+
+            console.log("Демонстрационная заявка:", {
+                name: name,
+                phone: phone,
+                message: message
+            });
+
+            contactForm.reset();
+        });
+    }
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ростик — Junior Frontend Developer</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #09090f;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 10%;
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #8b5cf6;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+
+    /* Фоновое изображение */
+    background-image:
+    linear-gradient(
+        to bottom,
+        rgba(5, 5, 10, 0.25) 0%,
+        rgba(5, 5, 10, 0.55) 60%,
+        #09090f 100%
+    ),
+    url("imeges/mountains.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.tag {
+    color: #a78bfa;
+    background: #1c1530;
+    padding: 10px 18px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: clamp(40px, 7vw, 75px);
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 25px;
+}
+
+h1 span {
+    color: #a78bfa;
+}
+
+.hero-text {
+    color: #d1c4e9;
+    font-size: 18px;
+    width: 100%;
+    max-width: 1000px;
+    line-height: 1.7;
+    margin: 25px auto 35px;
+}
+
+
+.btn {
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(135deg, #9333ea, #6d28d9);
+    color: white;
+    padding: 16px 30px;
+    border: 1px solid rgba(192, 132, 252, 0.4);
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+
+    box-shadow:
+        0 0 15px rgba(168, 85, 247, 0.6),
+        0 0 35px rgba(124, 58, 237, 0.4);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+section {
+    padding: 80px 10%;
+}
+
+.section-title {
+    font-size: 35px;
+    margin-bottom: 40px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+
+.card {
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        #191625,
+        #11111b
+    );
+
+    border: 1px solid #292936;
+    border-radius: 18px;
+    padding: 30px;
+
+    transition: all 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+
+    border-color: #a855f7;
+
+    box-shadow:
+        0 10px 25px rgba(139, 92, 246, 0.25),
+        0 0 25px rgba(139, 92, 246, 0.2);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(168, 85, 247, 0.12),
+        transparent
+    );
+
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card p {
+    color: #999;
+    line-height: 1.6;
+}
+
+.contact {
+    text-align: center;
+    background: #12101d;
+    border-top: 1px solid #292936;
+}
+
+.contact p {
+    color: #aaa;
+    margin: 20px 0 35px;
+}
+
+footer {
+    text-align: center;
+    color: #666;
+    padding: 25px;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+    .hero {
+        background-attachment: scroll;
+    }
+}
+
+.hero-title {
+    animation: appear 1s ease forwards;
+}
+
+.hero-title {
+    animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 12px;
+    background: #251b3d;
+    color: #a78bfa;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+
+.project-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.project-card img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.06);
+}
+
+.project-info {
+    padding: 25px;
+}
+
+.project-info h3 {
+    color: #c084fc;
+    margin-bottom: 15px;
+}
+
+.project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+} 
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Ростик<span>.</span></div>
+   <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#skills">Навыки</a>
+    <a href="#services">Услуги</a>
+    <a href="#projects">Проекты</a>
+    <a href="#contact">Контакты</a>
+</nav>
+</header>
+
+<main>
+    <section class="hero" id="home">
+    <div class="hero-content">
+        <span class="hero-tag">👋 Привет! Я Ростик</span>
+
+        <h1 class="hero-title">
+    Создаю современные<br>
+    <span>сайты и веб-проекты</span>
+</h1>
+
+        <p class="hero-text">
+            Я Junior Frontend Developer. Изучаю веб-разработку, создаю красивые и удобные сайты и постоянно развиваю свои навыки.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#projects" class="btn">Мои проекты</a>
+            <a href="#contact" class="btn btn-outline">Связаться со мной</a>
+        </div>
+    </div>
+</section>
+
+    <section id="about">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="card">
+            <h3>Привет! Я Ростик 👋</h3>
+           <p>
+    Я Junior Frontend Developer в начале своего профессионального пути.
+    Создаю современные сайты, изучаю новые технологии
+    и постоянно совершенствую свои навыки.
+</p>
+        </div>
+    </section>
+
+    <section id="skills">
+    <h2 class="section-title">Мои навыки</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🌐 HTML5</h3>
+            <p>
+                Создание структуры сайтов
+                и семантическая разметка.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🎨 CSS3</h3>
+            <p>
+                Адаптивная вёрстка,
+                стилизация и анимации.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>⚡ JavaScript</h3>
+            <p>
+                Изучение основ программирования
+                и интерактивности сайтов.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛠️ VS Code</h3>
+            <p>
+                Работа с редактором кода
+                и инструментами разработчика.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+    <section id="services">
+        <h2 class="section-title">Мои услуги</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>🌐 Лендинги</h3>
+                <p>Одностраничные сайты для бизнеса и рекламы.</p>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Веб-дизайн</h3>
+                <p>Современный дизайн и удобный интерфейс.</p>
+            </div>
+
+            <div class="card">
+                <h3>💻 Вёрстка</h3>
+                <p>Превращаю дизайн в работающие сайты.</p>
+            </div>
+        </div>
+    </section>
+
+<section id="projects">
+    <h2 class="section-title">Мои проекты</h2>
+
+    <div class="cards">
+    
+<a href="coffee.html" class="card project-card">
+    <img src="imeges/coffee.jpg" alt="Сайт кофейни">
+
+    <div class="project-info">
+        <h3>☕ Coffee House</h3>
+
+        <p>
+            Современный сайт уютной кофейни
+            с красивым дизайном и анимациями.
+        </p>
+
+        <span class="project-status">Учебный проект</span>
+    </div>
+</a>
+
+        
+<a href="gaming.html" class="card project-card">
+    <img src="imeges/logo.jpg" alt="Gaming Store">
+
+    <div class="project-info">
+        <h3>🎮 Gaming Store</h3>
+
+        <p>
+            Современный игровой интернет-магазин
+            с каталогом товаров и рабочей корзиной.
+        </p>
+
+        <span class="project-status">Учебный проект</span>
+    </div>
+</a>
+
+     <a href="company.html" class="card project-card">
+    <img src="imeges/nova-group.jpg" alt="NOVA GROUP">
+
+    <div class="project-info">
+        <h3>🏢 NOVA GROUP</h3>
+        <p>
+            Современный сайт архитектурной компании
+            с премиальным дизайном и адаптивной вёрсткой.
+        </p>
+        <span class="project-status">Учебный проект</span>
+    </div>
+</a>
+
+    </div>
+</section>
+ 
+    <section class="contact" id="contact">
+        <h2 class="section-title">Есть проект?</h2>
+        <p>Давай создадим что-нибудь крутое!</p>
+        <a href="mailto:forzaxstorm@email.com" class="btn">
+            Написать мне →
+        </a>
+    </section>
+</main>
+
+<footer>
+    © 2026 Ростик. Все права защищены.
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.15
+});
+
+document.querySelectorAll(
+    ".section-title, .card"
+).forEach((element) => {
+    element.classList.add("reveal");
+    observer.observe(element);
+});
+</script>
+
+</body>
+</html>
