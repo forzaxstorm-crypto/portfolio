@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee House — Кофейня</title>
+    <meta name="description" content="Coffee House в Киеве: меню эспрессо, капучино, латте и рафа, уютная атмосфера и информация для визита.">
+    <meta property="og:title" content="Coffee House — Кофейня">
+    <meta property="og:description" content="Coffee House в Киеве: меню эспрессо, капучино, латте и рафа, уютная атмосфера и информация для визита.">
+    <meta property="og:url" content="https://forzaxstorm-crypto.github.io/portfolio/coffee.html">
+    <meta property="og:image" content="https://forzaxstorm-crypto.github.io/portfolio/imeges/coffee.jpg">
+    <meta property="og:type" content="website">
 
     <style>
         * {
@@ -21,6 +27,21 @@
             font-family: Arial, sans-serif;
             background: #17100c;
             color: #f5e6d3;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            padding: 0.75rem 1rem;
+            background: #fff;
+            color: #111;
+            transform: translateY(calc(-100% - 1rem));
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
         }
 
         /* ШАПКА */
@@ -432,10 +453,32 @@
     transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-property: color, background-color, border-color, box-shadow !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal,
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
     </style>
 </head>
 
 <body>
+
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
 
     <header>
         <div class="logo">☕ COFFEE HOUSE</div>
@@ -447,6 +490,7 @@
         </nav>
     </header>
 
+<main id="main-content" tabindex="-1">
     <section class="hero" id="home">
         <div class="hero-content">
 
@@ -580,6 +624,8 @@
     </div>
 </section>
 
+    </main>
+
 <footer class="footer">
     <a href="#home" class="footer-logo">☕ COFFEE HOUSE</a>
 
@@ -599,24 +645,26 @@
         '.menu, .about, .contact, .footer, .menu-card, .contact-card'
     );
 
-    revealElements.forEach(element => {
-        element.classList.add('reveal');
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
+    if (typeof IntersectionObserver === 'function') {
+        revealElements.forEach(element => {
+            element.classList.add('reveal');
         });
-    }, {
-        threshold: 0.15
-    });
 
-    revealElements.forEach(element => {
-        observer.observe(element);
-    });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
 </script>
 
 </body>

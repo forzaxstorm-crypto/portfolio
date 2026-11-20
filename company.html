@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA GROUP — Современные пространства для бизнеса</title>
+    <meta name="description" content="NOVA GROUP проектирует и реализует современные пространства для бизнеса: архитектура, коммерческие интерьеры и строительство.">
+    <meta property="og:title" content="NOVA GROUP — Современные пространства для бизнеса">
+    <meta property="og:description" content="NOVA GROUP проектирует и реализует современные пространства для бизнеса: архитектура, коммерческие интерьеры и строительство.">
+    <meta property="og:url" content="https://forzaxstorm-crypto.github.io/portfolio/company.html">
+    <meta property="og:image" content="https://forzaxstorm-crypto.github.io/portfolio/imeges/nova-group.jpg">
+    <meta property="og:type" content="website">
 
     <style>
         * {
@@ -21,6 +27,21 @@
             font-family: Arial, sans-serif;
             background: #f5f5f2;
             color: #17202b;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            padding: 0.75rem 1rem;
+            background: #fff;
+            color: #111;
+            transform: translateY(calc(-100% - 1rem));
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
         }
 
         /* ШАПКА */
@@ -568,6 +589,17 @@
     gap: 18px;
 }
 
+.contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-form label {
+    color: #c0c6cc;
+    font-size: 14px;
+}
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -847,6 +879,8 @@
 
 <body>
 
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
+
     <!-- ШАПКА -->
 
     <header class="header">
@@ -870,7 +904,7 @@
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <section class="hero" id="home">
             <div class="hero-content">
                 <div class="hero-tag">Архитектура нового бизнеса</div>
@@ -1071,24 +1105,35 @@
 
                     <div class="contact-details">
                         <div>
-                            <span>EMAIL</span>
-                            <p>hello@novagroup.example</p>
+                            <span>EMAIL — ПРИМЕР</span>
+                            <p>hello@novagroup.example <small>(не реальный контакт)</small></p>
                         </div>
                         <div>
-                            <span>ТЕЛЕФОН</span>
-                            <p>+380 (00) 000 00 00</p>
+                            <span>ТЕЛЕФОН — ПРИМЕР</span>
+                            <p>+380 (00) 000 00 00 <small>(не реальный контакт)</small></p>
                         </div>
                     </div>
                 </div>
 
                 <form class="contact-form">
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="tel" placeholder="Ваш телефон" required>
-                    <textarea placeholder="Расскажите о вашем проекте" rows="5"></textarea>
+                    <div class="contact-field">
+                        <label for="contact-name">Ваше имя (обязательно)</label>
+                        <input id="contact-name" type="text" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="contact-field">
+                        <label for="contact-phone">Ваш телефон (обязательно)</label>
+                        <input id="contact-phone" type="tel" placeholder="Ваш телефон" required>
+                    </div>
+                    <div class="contact-field">
+                        <label for="contact-message">Расскажите о вашем проекте</label>
+                        <textarea id="contact-message" placeholder="Расскажите о вашем проекте" rows="5"></textarea>
+                    </div>
                     <button type="submit">Отправить заявку →</button>
                 </form>
             </div>
         </section>
+
+    </main>
 
     <!-- FOOTER -->
 
@@ -1114,8 +1159,8 @@
 
             <div class="footer-contact">
                 <h3>Связаться с нами</h3>
-                <p>hello@novagroup.example</p>
-                <p>+380 (00) 000 00 00</p>
+                <p>Пример, не реальный контакт: hello@novagroup.example</p>
+                <p>Пример, не реальный контакт: +380 (00) 000 00 00</p>
                 <a href="#contact">Оставить заявку →</a>
             </div>
 
@@ -1126,8 +1171,6 @@
             <span>Архитектура нового бизнеса</span>
         </div>
     </footer>
-
-    </main>
 
 <script>
 
@@ -1183,18 +1226,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const name = contactForm.querySelector(
-                'input[type="text"]'
-            ).value.trim();
-
-            const phone = contactForm.querySelector(
-                'input[type="tel"]'
-            ).value.trim();
-
-            const message = contactForm.querySelector(
-                "textarea"
-            ).value.trim();
-
             let status = contactForm.querySelector(".form-status");
 
             if (!status) {
@@ -1205,28 +1236,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 contactForm.appendChild(status);
             }
 
-            if (!name || !phone) {
-                status.textContent = "Заполните имя и телефон.";
-                return;
-            }
-
-            // Демонстрационный режим:
-            // данные пока не отправляются на сервер.
-
             status.textContent =
-                "Спасибо, " + name +
-                "! Форма работает в демонстрационном режиме. " +
-                "Для реальной отправки нужно подключить сервер.";
-
-            status.style.color = "#d6b47e";
-
-            console.log("Демонстрационная заявка:", {
-                name: name,
-                phone: phone,
-                message: message
-            });
-
-            contactForm.reset();
+                "Это демонстрационная форма. Отправка данных пока недоступна.";
         });
     }
 

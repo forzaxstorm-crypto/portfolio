@@ -5,6 +5,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ростислав — Junior Frontend Developer</title>
+<meta name="description" content="Портфолио Ростислава, frontend-разработчика: адаптивные сайты и веб-проекты на HTML, CSS и JavaScript.">
+<meta property="og:title" content="Ростислав — Junior Frontend Developer">
+<meta property="og:description" content="Портфолио Ростислава, frontend-разработчика: адаптивные сайты и веб-проекты на HTML, CSS и JavaScript.">
+<meta property="og:url" content="https://forzaxstorm-crypto.github.io/portfolio/">
+<meta property="og:image" content="https://forzaxstorm-crypto.github.io/portfolio/imeges/pixelforge-studio.png">
+<meta property="og:type" content="website">
 
 <style>
 * {
@@ -21,6 +27,21 @@ body {
     background: #09090f;
     color: white;
     font-family: Arial, sans-serif;
+}
+
+.skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    color: #111;
+    transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+    transform: translateY(0);
 }
 
 header {
@@ -78,7 +99,9 @@ nav a:hover {
 }
 
 
-.tag {
+.tag,
+.hero-tag {
+    display: inline-block;
     color: #a78bfa;
     background: #1c1530;
     padding: 10px 18px;
@@ -134,6 +157,19 @@ h1 span {
 
 .btn:active {
     transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #d1c4e9;
+    border-color: #a78bfa;
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background: rgba(139, 92, 246, 0.12);
+    border-color: #c084fc;
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
 }
 
 section {
@@ -340,10 +376,53 @@ footer {
     color: #a78bfa;
 }
 
+.reveal {
+    opacity: 0;
+    translate: 0 24px;
+    transition: opacity 0.6s ease, translate 0.6s ease;
+}
+
+.card.reveal {
+    transition:
+        opacity 0.6s ease,
+        translate 0.6s ease,
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.reveal.active,
+.reveal:focus-within {
+    opacity: 1;
+    translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-property: color, background-color, border-color, box-shadow !important;
+    }
+
+    .reveal,
+    .reveal.active,
+    .reveal:focus-within {
+        opacity: 1;
+        translate: none;
+    }
+}
+
 </style>
 </head>
 
 <body>
+
+<a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
 
 <header>
     <div class="logo">Ростислав<span>.</span></div>
@@ -356,7 +435,7 @@ footer {
 </nav>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
     <section class="hero" id="home">
     <div class="hero-content">
         <span class="hero-tag">👋 Привет! Я Ростислав</span>
@@ -456,7 +535,7 @@ footer {
     <div class="cards">
     
 <article class="card project-card">
-    <img src="imeges/coffee.jpg" alt="Сайт кофейни">
+    <img src="imeges/coffee.jpg" alt="Интерьер кофейни Coffee House">
 
     <div class="project-info">
         <h3>☕ Coffee House</h3>
@@ -477,7 +556,7 @@ footer {
 
         
 <article class="card project-card">
-    <img src="imeges/logo.jpg" alt="Gaming Store">
+    <img src="imeges/logo.jpg" alt="Символ PlayStation">
 
     <div class="project-info">
         <h3>🎮 Gaming Store</h3>
@@ -497,7 +576,7 @@ footer {
 </article>
 
      <article class="card project-card">
-    <img src="imeges/nova-group.jpg" alt="NOVA GROUP">
+    <img src="imeges/nova-group.jpg" alt="Современный бизнес-центр NOVA GROUP">
 
     <div class="project-info">
         <h3>🏢 NOVA GROUP</h3>
@@ -551,23 +630,25 @@ footer {
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-        }
+if (typeof IntersectionObserver === "function") {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
     });
-}, {
-    threshold: 0.15
-});
 
-document.querySelectorAll(
-    ".section-title, .card"
-).forEach((element) => {
-    element.classList.add("reveal");
-    observer.observe(element);
-});
+    document.querySelectorAll(
+        ".section-title, .card"
+    ).forEach((element) => {
+        element.classList.add("reveal");
+        observer.observe(element);
+    });
+}
 </script>
 
 </body>

@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Store — Магазин игровых товаров</title>
+    <meta name="description" content="Gaming Store — каталог игровых консолей и аксессуаров с демонстрационными ценами и корзиной покупок.">
+    <meta property="og:title" content="Gaming Store — Магазин игровых товаров">
+    <meta property="og:description" content="Gaming Store — каталог игровых консолей и аксессуаров с демонстрационными ценами и корзиной покупок.">
+    <meta property="og:url" content="https://forzaxstorm-crypto.github.io/portfolio/gaming.html">
+    <meta property="og:image" content="https://forzaxstorm-crypto.github.io/portfolio/imeges/ps5-pro.jpg">
+    <meta property="og:type" content="website">
 
     <style>
         * {
@@ -21,6 +27,21 @@
             background: #0b0b12;
             color: #ffffff;
             font-family: Arial, sans-serif;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            padding: 0.75rem 1rem;
+            background: #fff;
+            color: #111;
+            transform: translateY(calc(-100% - 1rem));
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
         }
 
         /* ШАПКА */
@@ -1309,18 +1330,16 @@
         0 0 30px #6d28d9;
 
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
     transform: translateX(40px);
 
     transition:
         opacity 0.35s ease,
-        transform 0.35s ease,
-        visibility 0.35s ease;
+        transform 0.35s ease;
 }
 
 .cart-toast.show {
     opacity: 1;
-    visibility: visible;
     transform: translateX(0);
 }
 
@@ -1491,19 +1510,27 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 28px 0;
 }
 
-.footer-nav a {
+.footer-nav a,
+.footer-nav button {
     color: #b9a8cc;
     text-decoration: none;
     font-size: 15px;
     font-weight: bold;
     letter-spacing: 1px;
+    font-family: inherit;
+    line-height: inherit;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
     transition:
         color 0.3s ease,
         transform 0.3s ease,
         text-shadow 0.3s ease;
 }
 
-.footer-nav a:hover {
+.footer-nav a:hover,
+.footer-nav button:hover {
     color: #d8b8ff;
     transform: translateY(-4px);
     text-shadow:
@@ -1517,8 +1544,30 @@ html::-webkit-scrollbar-thumb:hover {
         gap: 18px;
     }
 
-    .footer-nav a {
+    .footer-nav a,
+    .footer-nav button {
         font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-property: color, background-color, border-color, box-shadow !important;
+        scroll-behavior: auto !important;
+    }
+
+    .product-card.reveal-ready,
+    .product-card.reveal-ready.is-visible {
+        opacity: 1;
+        transform: none;
+        filter: none;
     }
 }
 
@@ -1526,6 +1575,8 @@ html::-webkit-scrollbar-thumb:hover {
 </head>
 
 <body>
+
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
 
     <header class="header">
         <div class="logo">🎮 GAMING STORE</div>
@@ -1546,6 +1597,7 @@ html::-webkit-scrollbar-thumb:hover {
 </button>
     </header>
 
+<main id="main-content" tabindex="-1">
     <section class="hero" id="home">
     <div class="hero-content">
         <span class="hero-tag">Твоя игровая территория</span>
@@ -1750,18 +1802,20 @@ html::-webkit-scrollbar-thumb:hover {
     </div>
 </section>
 
+    </main>
+
 <!-- УВЕДОМЛЕНИЕ О ДОБАВЛЕНИИ -->
-<div class="cart-toast" id="cart-toast">
-    <span class="toast-check">✓</span>
-    <span>Товар добавлен в корзину</span>
+<div class="cart-toast" id="cart-toast" role="status" aria-live="polite" aria-atomic="true">
+    <span class="toast-check" aria-hidden="true">✓</span>
+    <span id="cart-toast-message"></span>
 </div>
 
 <div class="cart-overlay" id="cart-overlay">
-    <div class="cart-modal">
+    <div class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
 
         <div class="cart-header">
-            <h2>🛒 ТВОЯ КОРЗИНА</h2>
-            <button class="cart-close" id="cart-close">&times;</button>
+            <h2 id="cart-title">🛒 ТВОЯ КОРЗИНА</h2>
+            <button class="cart-close" id="cart-close" aria-label="Закрыть корзину">&times;</button>
         </div>
 
         <div id="cart-items">
@@ -1776,7 +1830,48 @@ html::-webkit-scrollbar-thumb:hover {
 </div>
 
 <script>
-    let cart = JSON.parse(localStorage.getItem("gamingCart")) || [];
+    function isValidCartItem(item) {
+        return item !== null
+            && typeof item === "object"
+            && typeof item.name === "string"
+            && item.name.trim().length > 0
+            && item.name.length <= 200
+            && Number.isFinite(item.price)
+            && item.price >= 0
+            && Number.isSafeInteger(item.quantity)
+            && item.quantity > 0;
+    }
+
+    function loadCart() {
+        try {
+            const storedCart = localStorage.getItem("gamingCart");
+
+            if (storedCart === null) {
+                return [];
+            }
+
+            const parsedCart = JSON.parse(storedCart);
+
+            if (!Array.isArray(parsedCart)) {
+                throw new TypeError("Saved cart data is not an array.");
+            }
+
+            const validCart = parsedCart.filter(isValidCartItem);
+
+            if (validCart.length !== parsedCart.length) {
+                console.error("Some invalid items were skipped while loading the cart.");
+            }
+
+            return validCart;
+        } catch (error) {
+            console.error("Could not load the saved cart from localStorage:", error);
+            return [];
+        }
+    }
+
+    let cart = loadCart();
+    const cartItemByElement = new WeakMap();
+    const pendingRemovals = new WeakSet();
 
     const cartOpen = document.getElementById("cart-open");
     const cartClose = document.getElementById("cart-close");
@@ -1785,20 +1880,57 @@ html::-webkit-scrollbar-thumb:hover {
     const cartCount = document.getElementById("cart-count");
     const cartTotal = document.getElementById("cart-total");
 const cartToast = document.getElementById("cart-toast");
+    const cartToastMessage = document.getElementById("cart-toast-message");
+    const cartModal = document.querySelector(".cart-modal");
+    const backgroundInertState = new Map();
+    let cartOpener = null;
 let toastTimer;
 
- // Ссылка на корзину в футере
+ // Кнопка корзины в футере
+
+    function openCart(opener) {
+        if (cartOverlay.classList.contains("active")) return;
+
+        cartOpener = opener;
+
+        Array.from(document.body.children).forEach(element => {
+            if (element !== cartOverlay) {
+                backgroundInertState.set(element, element.inert);
+                element.inert = true;
+            }
+        });
+
+        cartOverlay.classList.add("active");
+        cartClose.focus();
+    }
+
+    function closeCart() {
+        if (!cartOverlay.classList.contains("active")) return;
+
+        cartOverlay.classList.remove("active");
+
+        backgroundInertState.forEach((wasInert, element) => {
+            element.inert = wasInert;
+        });
+        backgroundInertState.clear();
+
+        if (cartOpener && cartOpener.isConnected) {
+            cartOpener.focus();
+        }
+
+        cartOpener = null;
+    }
 
 document.addEventListener("click", (event) => {
-    const footerCartLink = event.target.closest("#footer-cart-link");
+    const footerCartButton = event.target.closest("#footer-cart-link");
 
-    if (footerCartLink) {
-        event.preventDefault();
-        cartOverlay.classList.add("active");
+    if (footerCartButton) {
+        openCart(footerCartButton);
     }
 });
 
 function showCartToast() {
+    cartToastMessage.textContent = "Товар добавлен в корзину";
     cartToast.classList.add("show");
 
     cartOpen.classList.remove("cart-active");
@@ -1813,21 +1945,66 @@ setTimeout(() => {
 
     toastTimer = setTimeout(() => {
         cartToast.classList.remove("show");
+        setTimeout(() => {
+            if (!cartToast.classList.contains("show")) {
+                cartToastMessage.textContent = "";
+            }
+        }, 350);
     }, 1800);
 }
 
     // Открытие и закрытие корзины
     cartOpen.addEventListener("click", () => {
-        cartOverlay.classList.add("active");
+        openCart(cartOpen);
     });
 
     cartClose.addEventListener("click", () => {
-        cartOverlay.classList.remove("active");
+        closeCart();
     });
 
     cartOverlay.addEventListener("click", (event) => {
         if (event.target === cartOverlay) {
-            cartOverlay.classList.remove("active");
+            closeCart();
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (!cartOverlay.classList.contains("active")) return;
+
+        if (event.key === "Escape") {
+            event.preventDefault();
+            closeCart();
+            return;
+        }
+
+        if (event.key !== "Tab") return;
+
+        const focusableElements = Array.from(cartModal.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ));
+
+        if (focusableElements.length === 0) {
+            event.preventDefault();
+            cartModal.focus();
+            return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        const focusedElement = document.activeElement;
+
+        if (!cartModal.contains(focusedElement)) {
+            event.preventDefault();
+            (event.shiftKey ? lastElement : firstElement).focus();
+        } else if (focusedElement === cartModal) {
+            event.preventDefault();
+            (event.shiftKey ? lastElement : firstElement).focus();
+        } else if (event.shiftKey && focusedElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (!event.shiftKey && focusedElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
         }
     });
 
@@ -1869,42 +2046,89 @@ setTimeout(() => {
     });
 
     // Обновление корзины
-    function updateCart() {localStorage.setItem("gamingCart", JSON.stringify(cart));
-        cartItems.innerHTML = "";
+    function updateCart() {
+        const focusedCartButton = cartItems.contains(document.activeElement)
+            ? document.activeElement
+            : null;
+        const focusedItem = focusedCartButton
+            && cartItemByElement.get(focusedCartButton.closest(".cart-item"));
+        const focusedAction = focusedCartButton && focusedCartButton.dataset.action;
+
+        try {
+            localStorage.setItem("gamingCart", JSON.stringify(cart));
+        } catch (error) {
+            console.error("Could not save the cart to localStorage:", error);
+        }
+
+        cartItems.textContent = "";
 
         let total = 0;
         let count = 0;
 
         if (cart.length === 0) {
-            cartItems.innerHTML =
-                '<p class="cart-empty">Корзина пока пуста</p>';
+            const emptyMessage = document.createElement("p");
+            emptyMessage.className = "cart-empty";
+            emptyMessage.textContent = "Корзина пока пуста";
+            cartItems.appendChild(emptyMessage);
         }
 
-        cart.forEach((item, index) => {
+        cart.forEach(item => {
             total += item.price * item.quantity;
             count += item.quantity;
 
             const cartItem = document.createElement("div");
             cartItem.className = "cart-item";
+            cartItemByElement.set(cartItem, item);
 
-            cartItem.innerHTML = `
-                <div class="cart-item-info">
-                    <strong>${item.name}</strong>
-                    <span>${item.price.toLocaleString("ru-RU")} ₴ за штуку</span>
-                </div>
+            const itemInfo = document.createElement("div");
+            itemInfo.className = "cart-item-info";
 
-                <div class="cart-quantity">
-                    <button data-action="minus" data-index="${index}">−</button>
-                    <span class="quantity-number">${item.quantity}</span>
-                    <button data-action="plus" data-index="${index}">+</button>
-                </div>
+            const itemName = document.createElement("strong");
+            itemName.textContent = item.name;
 
-                <button class="remove-item" data-action="remove"
-                    data-index="${index}">✕</button>
-            `;
+            const itemPrice = document.createElement("span");
+            itemPrice.textContent = `${item.price.toLocaleString("ru-RU")} ₴ за штуку`;
+
+            itemInfo.append(itemName, itemPrice);
+
+            const quantityControls = document.createElement("div");
+            quantityControls.className = "cart-quantity";
+
+            const minusButton = document.createElement("button");
+            minusButton.dataset.action = "minus";
+            minusButton.setAttribute("aria-label", `Уменьшить количество товара: ${item.name}`);
+            minusButton.textContent = "−";
+
+            const quantity = document.createElement("span");
+            quantity.className = "quantity-number";
+            quantity.textContent = item.quantity;
+
+            const plusButton = document.createElement("button");
+            plusButton.dataset.action = "plus";
+            plusButton.setAttribute("aria-label", `Увеличить количество товара: ${item.name}`);
+            plusButton.textContent = "+";
+
+            quantityControls.append(minusButton, quantity, plusButton);
+
+            const removeButton = document.createElement("button");
+            removeButton.className = "remove-item";
+            removeButton.dataset.action = "remove";
+            removeButton.setAttribute("aria-label", `Удалить товар из корзины: ${item.name}`);
+            removeButton.textContent = "✕";
+
+            cartItem.append(itemInfo, quantityControls, removeButton);
 
             cartItems.appendChild(cartItem);
         });
+
+        if (focusedCartButton) {
+            const updatedItemElement = Array.from(cartItems.querySelectorAll(".cart-item"))
+                .find(element => cartItemByElement.get(element) === focusedItem);
+            const updatedButton = updatedItemElement
+                && updatedItemElement.querySelector(`button[data-action="${focusedAction}"]`);
+
+            (updatedButton || cartClose).focus();
+        }
 
         cartCount.textContent = count;
         cartCount.classList.remove("pulse");
@@ -1913,38 +2137,38 @@ cartCount.classList.add("pulse");
         cartTotal.textContent = total.toLocaleString("ru-RU") + " ₴";
     }
 
-    // Изменение количества и удаление
-    // Изменение количества и удаление
 cartItems.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-action]");
 
     if (!button) return;
 
-    const index = Number(button.dataset.index);
+    const itemElement = button.closest(".cart-item");
+    const item = itemElement && cartItemByElement.get(itemElement);
     const action = button.dataset.action;
 
+    if (!item || !cart.includes(item) || pendingRemovals.has(item)) return;
+
     if (action === "plus") {
-        cart[index].quantity++;
+        item.quantity++;
         updateCart();
     }
 
     if (action === "minus") {
-        cart[index].quantity--;
+        item.quantity--;
 
-        if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
+        if (item.quantity <= 0) {
+            cart = cart.filter(cartItem => cartItem !== item);
         }
 
         updateCart();
     }
 
     if (action === "remove") {
-        const itemElement = button.closest(".cart-item");
-
+        pendingRemovals.add(item);
         itemElement.classList.add("is-removing");
 
         setTimeout(() => {
-            cart.splice(index, 1);
+            cart = cart.filter(cartItem => cartItem !== item);
             updateCart();
         }, 350);
     }
@@ -1954,25 +2178,27 @@ cartItems.addEventListener("click", (event) => {
 
 const productCards = document.querySelectorAll(".product-card");
 
-productCards.forEach((card, index) => {
-    card.classList.add("reveal-ready");
-    card.style.transitionDelay = `${index * 150}ms`;
-});
-
-const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            cardObserver.unobserve(entry.target);
-        }
+if (typeof IntersectionObserver === "function") {
+    productCards.forEach((card, index) => {
+        card.classList.add("reveal-ready");
+        card.style.transitionDelay = `${index * 150}ms`;
     });
-}, {
-    threshold: 0.15
-});
 
-productCards.forEach((card) => {
-    cardObserver.observe(card);
-});
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    productCards.forEach((card) => {
+        cardObserver.observe(card);
+    });
+}
 
     // Загружаем сохранённую корзину при открытии сайта
 updateCart();
@@ -1987,7 +2213,7 @@ updateCart();
     <a href="#home">Главная</a>
     <a href="#catalog">Каталог</a>
     <a href="#about">О нас</a>
-    <a href="#" id="footer-cart-link">Корзина</a>
+    <button type="button" id="footer-cart-link">Корзина</button>
     <a href="#contact">Контакты</a>
 </nav>
         <div class="footer-line"></div>
